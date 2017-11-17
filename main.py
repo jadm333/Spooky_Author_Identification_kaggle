@@ -1,5 +1,31 @@
 # -*- coding: utf-8 -*-
+'''
+green day
+phoenix
+alt j
+the shins
+grizzly bear
+boys noize
+cold war kids
+the drums
+gordon city
+crystal fighters
+grouplove
+bakermat
+dualipa
+mystery jets
+the sounds
+washed out
+wild belle
+whitney
+honne
+parson james
+lany
+rafferty
+shy girls
 
+
+'''
 #%%  CARGAR DATOS Y PAQUTERIAS
 
 import pandas as pd
@@ -17,7 +43,8 @@ from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopword
 from gensim.models import Phrases
 from gensim.models import AuthorTopicModel
 from gensim.corpora import Dictionary
-
+import os
+import re
 nlp = spacy.load('en')
 
 # Define function to cleanup text by removing personal pronouns, stopwords, and puncuation
@@ -49,6 +76,15 @@ def filtrar_extremos(docs,max_freq=0.5,min_wordcount=2,n_top=3):
 
     return dictionary
 
+def folder():
+    all_subdirs = [d for d in os.listdir('.') if os.path.isdir(d)]
+    i = []
+    for f in all_subdirs:
+        n = re.findall('\d+', f)
+        if len(n) > 0:
+            i.append(int(n[0]))
+    return str(max(i) + 1)
+
 #%%
 
 train_cleaned = cleanup_text(train['text'])
@@ -61,9 +97,6 @@ dictionary = filtrar_extremos(docs)
 corpus = [dictionary.doc2bow(doc) for doc in docs]
 id_borrar = [i for i in range(0,len(corpus)) if len(corpus[i]) == 0]
 #%%
-corpus, dictionary, author2doc
-
-#%%
 #BORRAR textos VACIOS
 train = train.drop(train.index[id_borrar])
 train = train.reset_index(drop=True)
@@ -75,3 +108,29 @@ for s in range(0,len(train_c)):
 docs = bigramas(train_c)
 dictionary = filtrar_extremos(docs)
 corpus = [dictionary.doc2bow(doc) for doc in docs]
+id_borrar = [i for i in range(0,len(corpus)) if len(corpus[i]) == 0]
+#%%% author2doc
+
+author2doc = {}
+for aut in train.author.unique():
+    author2doc[aut] = []
+    
+for index, row in train.iterrows():
+    author2doc[row['author']].append(index)
+
+
+#%%
+print('# de autores: %d' % len(author2doc))
+print('# tokens unicos: %d' % len(dictionary))
+print('# de documentos: %d' % len(corpus))
+
+#%% Correr MODELO
+model = AuthorTopicModel(corpus=corpus, num_topics=100, id2word=dictionary.id2token, author2doc=author2doc, chunksize=2000, passes=55, eval_every=0, iterations=10000000,gamma_threshold=1e-11)
+#%%
+f =  'modelo' + folder()
+os.makedirs(f)
+os.makedirs(f+'/LDA')
+
+model.save(f+'/model.atmodel')
+
+print("MODELO TERMINADO Y GUARDADO")
