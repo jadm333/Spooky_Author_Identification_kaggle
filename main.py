@@ -1,31 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-green day
-phoenix
-alt j
-the shins
-grizzly bear
-boys noize
-cold war kids
-the drums
-gordon city
-crystal fighters
-grouplove
-bakermat
-dualipa
-mystery jets
-the sounds
-washed out
-wild belle
-whitney
-honne
-parson james
-lany
-rafferty
-shy girls
 
-
-'''
 #%%  CARGAR DATOS Y PAQUTERIAS
 
 import pandas as pd
@@ -123,13 +96,13 @@ for index, row in train.iterrows():
 print('# de autores: %d' % len(author2doc))
 print('# tokens unicos: %d' % len(dictionary))
 print('# de documentos: %d' % len(corpus))
-
+print('*'*50)
+print('Entrenand modelo')
 #%% Correr MODELO
 model = AuthorTopicModel(corpus=corpus, num_topics=100, id2word=dictionary.id2token, author2doc=author2doc, chunksize=2000, passes=55, eval_every=0, iterations=10000000,gamma_threshold=1e-11)
 #%%
 f =  'modelo' + folder()
 os.makedirs(f)
-os.makedirs(f+'/LDA')
 
 model.save(f+'/model.atmodel')
 
