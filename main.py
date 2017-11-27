@@ -2,6 +2,7 @@
 #%%  CARGAR DATOS Y PAQUTERIAS
 
 import pandas as pd
+import smtplib
 #import funcs  ##Funciones quese utilizan
 
 train = pd.read_csv("data/train.csv")
@@ -107,3 +108,9 @@ os.makedirs(f)
 model.save(f+'/model.atmodel')
 
 print("MODELO TERMINADO Y GUARDADO")
+mailer = smtplib.SMTP('smtp.gmail.com', 587)
+mailer.ehlo()
+mailer.starttls()
+mailer.login('jadm333@gmail.com', 'Pointer11111991')
+mailer.sendmail('jadm333@gmail.com', 'jadm333@gmail.com', 'Subject: Modelo terminado spooky')
+mailer.quit()
