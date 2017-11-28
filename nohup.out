@@ -1,0 +1,18 @@
+/root/anaconda3/lib/python3.6/site-packages/gensim/models/phrases.py:316: UserWarning: For a faster implementation, use the gensim.models.phrases.Phraser class
+  warnings.warn("For a faster implementation, use the gensim.models.phrases.Phraser class")
+# de autores: 3
+# tokens unicos: 11954
+# de documentos: 19513
+**************************************************
+Entrenand modelo
+MODELO TERMINADO Y GUARDADO
+Traceback (most recent call last):
+  File "main.py", line 117, in <module>
+    mailer.login('jadm333@gmail.com', 'Pointer11111991')
+  File "/root/anaconda3/lib/python3.6/smtplib.py", line 729, in login
+    raise last_exception
+  File "/root/anaconda3/lib/python3.6/smtplib.py", line 720, in login
+    initial_response_ok=initial_response_ok)
+  File "/root/anaconda3/lib/python3.6/smtplib.py", line 641, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (534, b'5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbuj\n5.7.14 HxBdwIT2rnjPuvbDyRNXC62ljWYvkfAHMxQJFNOt4v6hOxflyUm8z0jJy7XiUeU0TiavCh\n5.7.14 5q5V5bTVwiXQGQk2X_ybXrodF3HWvWXFcMNvkJ_lDanLBPwXVT6TVLnSyZUCL8b6zA6cMJ\n5.7.14 fLgCpFdX-01-3QqxQ3M5E8lGesqRrxXw11eAFiY8PU_W1UCOhuwAIcJxpCK8ikCUsPwXTQ\n5.7.14 heWGsl_dL-yKBJiYJ_RfkPScc5VLw> Please log in via your web browser and\n5.7.14 then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 i35sm112862qte.96 - gsmtp')
