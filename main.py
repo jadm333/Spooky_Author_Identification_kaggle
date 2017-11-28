@@ -57,7 +57,10 @@ def folder():
         n = re.findall('\d+', f)
         if len(n) > 0:
             i.append(int(n[0]))
-    return str(max(i) + 1)
+    try:
+        return str(max(i) + 1)
+    except:
+        return 1
 
 #%%
 
