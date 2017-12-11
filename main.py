@@ -111,9 +111,25 @@ os.makedirs(f)
 model.save(f+'/model.atmodel')
 
 print("MODELO TERMINADO Y GUARDADO")
-mailer = smtplib.SMTP('smtp.gmail.com', 587)
-mailer.ehlo()
-mailer.starttls()
-mailer.login('jadm333@gmail.com', 'Pointer11111991')
-mailer.sendmail('jadm333@gmail.com', 'jadm333@gmail.com', 'Subject: Modelo terminado spooky')
-mailer.quit()
+#%%
+
+#!/usr/bin/python
+
+import smtplib
+
+sender = 'jdiaz@thedatahub.mx'
+receivers = ['jadm333@gmail.com']
+
+message = """From: Python script <jdiaz@thedatahub.mx>
+To: Jose Diaz <jadm333@gmail.com>
+Subject: Script Terminado
+
+Script Spooky model terminado
+"""
+
+#try:
+smtpObj = smtplib.SMTP('smtp.gmail.com')
+smtpObj.sendmail(sender, receivers, message)         
+print("Successfully sent email")
+#except SMTPException:
+#   print("Error: unable to send email")

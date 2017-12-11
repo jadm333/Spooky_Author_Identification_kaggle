@@ -1,0 +1,1 @@
+command; echo "Process done" | mail -s "Process done" mail@domain.tld
